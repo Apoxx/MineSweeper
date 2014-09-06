@@ -2,34 +2,35 @@ import Board from './Board';
 import Position from './Position'
 
 class MineSweeper{
-	constructor(lines, cols, mines){
-		if(mines > lines * cols) mines = lines * cols;
-		this._lines = lines;
-		this._cols = cols;
-		this._mines = mines;
 
+	constructor(lines, cols, mines){
+		this.lines = lines || 10;
+		this.cols = cols || 10;
+		this._mines = mines || 10;
+		this._board = null;
+		if(this._mines > this.lines * this.cols) this._mines = this.lines * this.cols;
 	}
-	start(){
-		console.log(this.sweep(new Position(1,1)));
-		console.log(this._board.getPlayerView());
-	}
+
 	mark(position){
+		this._board.toggleMarkCell(position);
 	}
+
 	sweep(position){
 		if(!this._board){			
-			this.createNewGame();
-			while(this._board.getCell(position).minesAround > 0){
-				this.createNewGame();
-			}
+			this.createNewGame();			
+			this._board.addRandomMines(this._mines, position);
 		}
-		var tmp = this._board.checkCell(position);
-		console.log(this._board.getPlayerView());		
-		console.log(this._board.isCompleted());
-		return tmp;
+		return this._board.checkCell(position);
 	}
-	createNewGame(lines, cols, mines){		
-		this._board = new Board(this._lines, this._cols);
-		this._board.addRandomMines(this._mines);
+
+	createNewGame(){		
+		this._board = new Board(this.lines, this.cols);
+	}
+	renderDatas(){
+		return this._board.getPlayerView();
+	}
+	isWin(){
+		return this._board.isCompleted();
 	}
 }
 

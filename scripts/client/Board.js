@@ -22,9 +22,10 @@ class Board{
 	isEmpty(position){
 		return !this.getMine(position);
 	}
-	addRandomMines(mines){
+	addRandomMines(mines, excluded){
 		while(mines > 0){
-			if(this.addMine(Position.random(this._board.length, this._board[0].length))) mines--;
+			var pos = Position.random(this._board.length, this._board[0].length);
+			if(pos && !pos.equals(excluded) && this.addMine(pos)) mines--;
 		}
 		this._findMinesAround();
 	}
@@ -94,7 +95,9 @@ class Board{
 		}
 		return counter === this._board.length * this._board[0].length;
 	}
-	getPlayerView(){
+
+	//TODO: Rewrite based on getPlayerView.
+	getPlayerViewString(){
 		var repr = '';
 		for(var i = 0 ; i < this._board.length ; i++){
 			for(var j = 0 ; j < this._board[0].length ; j++){
@@ -104,6 +107,17 @@ class Board{
 			repr += '\n';
 		}
 		return repr;
+	}
+	getPlayerView(){
+		var result = [];
+		for(var i = 0 ; i < this._board.length ; i++){
+			result[i] = [];
+			for(var j = 0 ; j < this._board[0].length ; j++){
+				if(this._board[i][j].revealed) result[i][j] = this._board[i][j].minesAround;
+				else result[i][j] = this._board[i][j].marked ? -2 : -1;
+			}
+		}
+		return result;
 	}
 }
 

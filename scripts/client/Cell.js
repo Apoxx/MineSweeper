@@ -1,4 +1,5 @@
 class Cell{
+	
 	constructor(){
 		this.marked = false;
 		this.mine = false;

@@ -1,5 +1,5 @@
-import MineSweeper from './MineSweeper'
+import MineSweeperUI from './MineSweeperUI'
 
-window.game = new MineSweeper(5, 5, 1);
+var element = document.getElementById('game');
 
-game.start();
+var mineSweeper = new MineSweeperUI(element);
