@@ -3,6 +3,13 @@ html
     link(rel="stylesheet", href="index.css")
   body
     h1 MineSweeper
+    input#lines(type="text" placeholder="lines" value="10")
+    input#cols(type="text" placeholder="cols" value="10")
+    input#mines(type="text" placeholder="mines" value="10")
+    button#restart Restart
+    input#saveName(type="text" placeholder="Save name")
+    button#save Save
+    button#load Load
     #game
     script(src="index.js")
     script

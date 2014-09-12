@@ -1,19 +1,23 @@
+import {Random} from './Utils'
+
+var random = new Random()
+
 class Position{
 
 	constructor(x, y){
-		this.x = x;
-		this.y = y;
+		this.x = x
+		this.y = y
 	}
 
 	equals(position){
-		return position.x === this.x && position.y === this.y;
+		return position.x === this.x && position.y === this.y
 	}
 	
-	static random(maxx, maxy){
-		var x = Math.floor(Math.random() * maxx);
-		var y = Math.floor(Math.random() * maxy);
-		return new Position(x, y);
+	static random(maxX, maxY, rng){
+		var x = Math.floor(rng.next() * maxX)
+		var y = Math.floor(rng.next() * maxY)
+		return new Position(x, y)
 	}
 }
 
-export default Position;
+export default Position
