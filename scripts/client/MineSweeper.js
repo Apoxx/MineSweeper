@@ -42,7 +42,6 @@ class MineSweeper{
 	}
 
 	renderDatas(){
-		console.log(this._board.getPlayerViewString())
 		return this._board.getPlayerView()
 	}
 

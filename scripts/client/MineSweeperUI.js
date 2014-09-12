@@ -11,9 +11,11 @@ class MineSweeperUI{
 	}
 
 	set mineSweeper(mineSweeper){
-		this._mineSweeper = mineSweeper
-		this.createBoard()
-		this.render()
+		if(mineSweeper){
+			this._mineSweeper = mineSweeper
+			this.createBoard()
+			this.render()
+		}
 	}
 
 	get mineSweeper(){
