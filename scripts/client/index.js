@@ -1,13 +1,15 @@
-require('traceur/bin/traceur-runtime')
-import MineSweeperUI from './MineSweeperUI'
+import MineSweeperUI3D from './ui3d/MineSweeperUI3D'
+import MineSweeperUIDOM from './ui2d/MineSweeperUIDOM'
 import MineSweeper from './MineSweeper'
 import GameHistory from './GameHistory'
 
-var element = document.getElementById('game')
+var game3d = document.getElementById('game3d')
+var game2d = document.getElementById('game2d')
 
 var mineSweeper = new MineSweeper()
 
-var mineSweeperUI = new MineSweeperUI(element, mineSweeper)
+var mineSweeperUI3D = new MineSweeperUI3D(game3d, mineSweeper)
+var mineSweeperUIDOM = new MineSweeperUIDOM(game2d, mineSweeper)
 
 var restartBtn = document.getElementById('restart')
 var saveBtn = document.getElementById('save')
@@ -23,6 +25,6 @@ saveName.value = GameHistory.lastSave() || ''
 
 
 
-restartBtn.addEventListener('click', () => mineSweeperUI.mineSweeper = new MineSweeper(lines.value,cols.value,mines.value))
+restartBtn.addEventListener('click', () => mineSweeperUI.mineSweeper = new MineSweeper(lines.value, cols.value, mines.value))
 saveBtn.addEventListener('click', () => mineSweeperUI.mineSweeper.save(saveName.value))
 loadBtn.addEventListener('click', () => mineSweeperUI.mineSweeper = MineSweeper.load(saveName.value))

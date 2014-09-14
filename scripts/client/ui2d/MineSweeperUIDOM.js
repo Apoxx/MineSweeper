@@ -1,5 +1,5 @@
-import MineSweeper from './MineSweeper'
-import Position from './Position'
+import MineSweeper from '../MineSweeper'
+import Position from '../Position'
 
 class MineSweeperUI{
 
