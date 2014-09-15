@@ -10,19 +10,22 @@ class EntityFactory {
 	constructor(base) {
 		this.base = base
 		this.loader = new JSONLoader()
-		this.objs = {}
+		this.models = {}
 	}
 
-	create(name) {
+	create(type, name) {
 		return new Promise((resolve) => {
-			this.loader.load(`${this.base}${name}.js`, geometry => {				
-				var material = new MeshLambertMaterial({
-					map: ImageUtils.loadTexture(`${this.base}${name}.png`)
-				})
-				var obj = new Entity(geometry, material)
-				this.objs.name = obj
-				resolve(obj)
-			})
+			if(this.models[type]) resolve(new Entity(name, this.models[type].geometry, this.models[type].material))
+				else {
+					this.loader.load(`${this.base}${type}.js`, geometry => {				
+							var material = new MeshLambertMaterial({
+								map: ImageUtils.loadTexture(`${this.base}${type}.png`)
+							})
+							this.models[type] = {geometry, material}
+							var obj = new Entity(name, geometry, material)
+							resolve(obj)
+					})
+				}
 		})
 	}
 }
