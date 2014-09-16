@@ -1,4 +1,4 @@
-import Entity from './Entity'
+import EntityCell from './EntityCell'
 
 var {
 	JSONLoader,
@@ -15,14 +15,14 @@ class EntityFactory {
 
 	create(type, name) {
 		return new Promise((resolve) => {
-			if(this.models[type]) resolve(new Entity(name, this.models[type].geometry, this.models[type].material))
+			if(this.models[type]) resolve(new EntityCell(name, this.models[type].geometry, this.models[type].material))
 				else {
 					this.loader.load(`${this.base}${type}.js`, geometry => {				
 							var material = new MeshLambertMaterial({
 								map: ImageUtils.loadTexture(`${this.base}${type}.png`)
 							})
 							this.models[type] = {geometry, material}
-							var obj = new Entity(name, geometry, material)
+							var obj = new EntityCell(name, geometry, material)
 							resolve(obj)
 					})
 				}

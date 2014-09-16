@@ -41,7 +41,7 @@ class MineSweeper{
 		return this._board.checkCell(position)
 	}
 
-	renderDatas(){
+	renderData(){
 		return this._board.getPlayerView()
 	}
 

@@ -53,7 +53,7 @@ class MineSweeperUI{
 	}
 	
 	render(){
-		var data = this._mineSweeper.renderDatas()
+		var data = this._mineSweeper.renderData()
 		for (var i = 0; i < this._mineSweeper.lines; i++) {
 			for (var j = 0; j < this._mineSweeper.cols; j++) {
                 this._board[i][j].disabled = false

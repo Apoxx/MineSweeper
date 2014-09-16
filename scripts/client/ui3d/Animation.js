@@ -4,10 +4,10 @@ class Animation{
 		this.flow = flow
 	}
 
-	play(entity, loop, params){
+	play(entity, params){
 		var result = this.flow.call(entity, params)
-		if(loop && result instanceof Promise) result.then((newParams) => {
-			if(!newParams || newParams instanceof Object) this.play(entity, loop, newParams || params)
+		if(result instanceof Promise) result.then((replay) => {
+			if(replay) this.play(entity, params)
 		})
 		return result
 	}

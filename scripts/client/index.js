@@ -25,6 +25,10 @@ saveName.value = GameHistory.lastSave() || ''
 
 
 
-restartBtn.addEventListener('click', () => mineSweeperUI.mineSweeper = new MineSweeper(lines.value, cols.value, mines.value))
-saveBtn.addEventListener('click', () => mineSweeperUI.mineSweeper.save(saveName.value))
-loadBtn.addEventListener('click', () => mineSweeperUI.mineSweeper = MineSweeper.load(saveName.value))
+restartBtn.addEventListener('click', () => {
+	mineSweeper = new MineSweeper(lines.value, cols.value, mines.value)
+	mineSweeperUIDOM.mineSweeper = mineSweeper	
+	mineSweeperUI3D.mineSweeper = mineSweeper
+	})
+saveBtn.addEventListener('click', () => mineSweeperUIDOM.mineSweeper.save(saveName.value))
+loadBtn.addEventListener('click', () => mineSweeperUIDOM.mineSweeper = MineSweeper.load(saveName.value))
